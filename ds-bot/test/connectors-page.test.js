@@ -260,6 +260,7 @@ test('a failed mail add shows the host message inside the form', async () => {
   assert.ok(String(collect(n => String(n.props?.className ?? '').includes('bt-mail-form'))[0]?.props?.className ?? '').includes('bt-mail-form'), 'form stays open')
 })
 
+
 // Your own MCP servers: an address may sign in with OAuth, a command cannot.
 test('the add form offers OAuth only for an address and sends the flag', async () => {
   const adds = []
@@ -270,7 +271,7 @@ test('the add form offers OAuth only for an address and sends the flag', async (
   entry = AddMenu
   render()
   click('Add')
-  // The switch keeps its own aria-label inside the row.
+  // The switch row is expanded to its label and hint; its aria-label sits on the switch.
   const findToggle = () => collect(n => n.type === 'button' && n.props?.['aria-label'] === 'Sign in')[0]
   const findAdd = () => collect(n => n.type === 'button' && flatten(n).join('') === 'Add').at(-1)
   assert.ok(findToggle(), 'the address form offers OAuth sign-in')
